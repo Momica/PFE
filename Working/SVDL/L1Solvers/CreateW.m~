@@ -1,0 +1,29 @@
+function [WS] = CreateW(im_h,im_w,radius)
+
+ri = 1;
+for rh=-radius:radius
+    for rw=-radius:radius
+        WS(ri).M = [];
+        ri = ri+1;
+    end
+end
+
+       ri = 1;
+for rh=-radius:radius
+    for rw=-radius:radius
+       for h = 1:im_h
+           for w = 1:im_w
+
+               Im = zeros(im_h,im_w);
+               ph = h+rh;
+               pw = w+rw;
+               if ph>=1&ph<=im_h&pw>=1&pw<=im_w
+                   Im(ph,pw) = 1;
+               end
+               WS(ri).M = uint8([WS(ri).M uint8(Im(:))]);
+               ri = ri+1;
+           end
+       end
+  
+   end
+end
