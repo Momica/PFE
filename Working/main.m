@@ -13,9 +13,9 @@ addpath('meanface');  % Add the folder "meanface" to the path
 mode = 'h';
 %imread('features/images/001/001_03_01_041_00.png');
 %keyboard;
-landmarkDir='features/landmarksFace.txt';
+landmarkDir='../DataRetrieved/session4/landmarksFace.txt';
 %foundNotFoundDir='features/indexingFoundNotFound.txt';
-subjectDir='../DataRetrieved/full_face';
+subjectDir='../DataRetrieved/session4/full_face';
 fLandmark=fopen(landmarkDir,'r');
 %fFound=fopen(foundNotFoundDir,'r');
 tLine=fgetl(fLandmark);
@@ -54,7 +54,7 @@ while tLine~=-1
     end
     
     %create a destination directory per person
-    personDestDir = strcat('features/',personID); %sprintf('%03d',fix((idImage-1)/20)+1));
+    personDestDir = strcat('../DataRetrieved/session4/features/',personID); %sprintf('%03d',fix((idImage-1)/20)+1));
     disp(personDestDir);
     if not(exist(personDestDir))
         disp('person folder does not exist');
