@@ -27,8 +27,8 @@ dnum              =   400;
 
 load('database/session1_05_1_netural_all');
 %DAT = double(DAT);
-load('../../DataRetrieved/session1/featureSession1.mat');
-fullMatrixFeaturesRightEyeSession1 = double(fullMatrixFeaturesRightEyeSession1);
+load('../../DataRetrieved/session1/featuresSession1.mat');
+fullMatrixFeaturesRightEyeSession1 = double(fullMatrixFeaturesMouseSession1);
 labels(labels>213) = labels(labels>213) -1; % there is no data with label 213, so we shift the label
 
 % gallery samples 
@@ -79,8 +79,8 @@ isShow   =  true;
 session  =  4;
 par.nameDatabase  =   ['mpie_s' num2str(session) '_SVDL'];
 load(['database/session' num2str(session) '_05_1_netural_all']);
-load('../../DataRetrieved/session4/featureSession4.mat');
-fullMatrixFeaturesRightEyeSession4 = double(fullMatrixFeaturesRightEyeSession4);
+load('../../DataRetrieved/session4/featuresSession4.mat');
+fullMatrixFeaturesRightEyeSession4 = double(fullMatrixFeaturesMouseSession4);
 labels(labels>213) = labels(labels>213) -1;
 tt_dat = fullMatrixFeaturesRightEyeSession4;
 ttls   = labels;
