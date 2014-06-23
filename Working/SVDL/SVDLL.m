@@ -27,16 +27,16 @@ dnum              =   400;
 
 load('database/session1_05_1_netural_all');
 %DAT = double(DAT);
-load('../features.mat');
-DAT = double(fullMatrixFeaturesRightEye);
+load('../../DataRetrieved/session1/featureSession1.mat');
+fullMatrixFeaturesRightEyeSession1 = double(fullMatrixFeaturesRightEyeSession1);
 labels(labels>213) = labels(labels>213) -1; % there is no data with label 213, so we shift the label
 
 % gallery samples 
-tr_dat = DAT(:,8:20:end); trls = labels(:,8:20:end); % gallery samples , on récupère la 8ème image de chaque personne
+tr_dat = fullMatrixFeaturesRightEyeSession1(:,8:20:end); trls = labels(:,8:20:end); % gallery samples , on récupère la 8ème image de chaque personne
 tr_dat = tr_dat(:,trls<pro_sign); % contient une image de chaque personne ayant un label < pro_sign
 trls   = trls(:,trls<pro_sign);
 
-tr_dat_1 = DAT(:,8:20:end); trls_1 = labels(:,8:20:end);
+tr_dat_1 = fullMatrixFeaturesRightEyeSession1(:,8:20:end); trls_1 = labels(:,8:20:end);
 tr_dat_2 = tr_dat_1(:,trls<pro_sign); 
 trls_2   = trls_1(:,trls<pro_sign);
 
@@ -52,7 +52,7 @@ tr_dat_4   =  tr_dat_3./( repmat(sqrt(sum(tr_dat_3.*tr_dat_3)), [par.nDim,1]) );
 % reference subset and variation subset of generic training set
 ge_dat = []; d_dat = [];ge_ls = []; ge_id = 1;
 for ci = pro_sign:249
-   cdat = DAT(:,labels==ci);
+   cdat = fullMatrixFeaturesRightEyeSession1(:,labels==ci);
    if ~isempty(cdat)
       ge_dat = [ge_dat cdat(:,1:7) cdat(:,9:end)];
       ge_ls  = [ge_ls ge_id*ones(1,19)];
@@ -79,9 +79,10 @@ isShow   =  true;
 session  =  4;
 par.nameDatabase  =   ['mpie_s' num2str(session) '_SVDL'];
 load(['database/session' num2str(session) '_05_1_netural_all']);
-DAT = double(DAT);
+load('../../DataRetrieved/session4/featureSession4.mat');
+fullMatrixFeaturesRightEyeSession4 = double(fullMatrixFeaturesRightEyeSession4);
 labels(labels>213) = labels(labels>213) -1;
-tt_dat = DAT;
+tt_dat = fullMatrixFeaturesRightEyeSession4;
 ttls   = labels;
 tt_dat = tt_dat(:,ttls<pro_sign);
 ttls   = ttls(:,ttls<pro_sign);
