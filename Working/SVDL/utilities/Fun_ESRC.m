@@ -17,15 +17,15 @@ wro_gap  = [];
 for ti = 1:size(Test_M,2)
     disp(num2str(ti));
     y  = Test_M(:,ti);
-    [x, nIter] = SolveDALM(Train_M,y, 'lambda',lambda,'tolerance',1e-3);
+    [x, nIter] = SolveDALM(Train_M,y, 'lambda',lambda,'tolerance',1e-3); % SolveDALM correspond à Dual Augmented Lagrange Multiplier 
     y_add = Train_M(:,nNum+1:end)*x(nNum+1:end,1);
     for ci = 1:nCls
         class = label(ci);
         cdat = Train_M(:,train_label==class);
         er   = y - cdat*x(train_label==class) - y_add;
-        gap(ci) = er(:)'*er(:);
+        gap(ci) = er(:)'*er(:); % correspond à ei page5 du paper je pense ou alors un vecteur qui contint tout les ei
     end
-    index = find(gap == min(gap));
+    index = find(gap == min(gap)); % ne suffirait-il pas de sommmer les gaps de chacun des features et ensuite faire le min sur la somme ?
     ID(ti) = label(index(1));
 end
 correct_rate = sum(ID==test_label)/length(test_label);

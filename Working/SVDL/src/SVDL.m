@@ -23,6 +23,7 @@ function [D,er]   =   SVDL(Xg,Yg,X,lambda1,lambda2,lambda3,dnum,BnIter,nIter,isS
 %       BnIter   Outer Iternation number 
 %       nIter    Inner Iternation number in dictioanry updaing
 %       isShow   1: show the curve of objective function value; 0: not show
+%       dnum = number of dictionnary atoms
 %
 % OUTPUT:
 %       D   The learned variation dictionary

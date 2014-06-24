@@ -7,7 +7,7 @@
 %       tt_dat Testing Data
 %       ge_dat Generic training data
 %       ge_ls Generic labels
-%       disc_set Referentie d'eigenvectors
+%       disc_set Referentiel d'eigenvectors
 %       
 
 
@@ -56,10 +56,11 @@ for ci = pro_sign:249
    if ~isempty(cdat)
       ge_dat = [ge_dat cdat(:,1:7) cdat(:,9:end)];
       ge_ls  = [ge_ls ge_id*ones(1,19)];
-      d_dat  = [d_dat cdat(:,8)];  % c'est la 8 ème image qui est  pris comme reference subset // Il y a peu être une amélioration à faire ici.
+      d_dat  = [d_dat cdat(:,8)];  % c'est la 8 ème image qui est  pris comme reference subset, c'est juste parceque cela correspond bien à la variation de notre gallery set, mais cela implique une connaissance au préalable // Il y a peu être une amélioration à faire ici.
       ge_id  = ge_id + 1;
    end
 end
+% reduce the dimentionality of the generic and reference subset via PCA
 ge_dat  =  disc_set'*ge_dat;
 d_dat   =  disc_set'*d_dat;
 ge_dat  =  ge_dat./( repmat(sqrt(sum(ge_dat.*ge_dat)), [par.nDim,1]) );
