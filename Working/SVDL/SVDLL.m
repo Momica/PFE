@@ -28,17 +28,14 @@ dnum              =   400;
 load('database/session1_05_1_netural_all');
 %DAT = double(DAT);
 load('../../DataRetrieved/session1/featuresSession1.mat');
-fullMatrixFeaturesRightEyeSession1 = double(fullMatrixFeaturesMouseSession1);
+raw_data = double(fullMatrixFeaturesRightEyeSession1);
 labels(labels>213) = labels(labels>213) -1; % there is no data with label 213, so we shift the label
 
 % gallery samples 
-tr_dat = fullMatrixFeaturesRightEyeSession1(:,8:20:end); trls = labels(:,8:20:end); % gallery samples , on récupère la 8ème image de chaque personne
+tr_dat = raw_data(:,8:20:end); trls = labels(:,8:20:end); % gallery samples , on récupère la 8ème image de chaque personne
+%tr_dat = DAT(:,8:20:end); trls = labels(:,8:20:end); % gallery samples , on récupère la 8ème image de chaque personne
 tr_dat = tr_dat(:,trls<pro_sign); % contient une image de chaque personne ayant un label < pro_sign
 trls   = trls(:,trls<pro_sign);
-
-tr_dat_1 = fullMatrixFeaturesRightEyeSession1(:,8:20:end); trls_1 = labels(:,8:20:end);
-tr_dat_2 = tr_dat_1(:,trls<pro_sign); 
-trls_2   = trls_1(:,trls<pro_sign);
 
 
 % reduce the dimensionality via PCA
@@ -46,13 +43,12 @@ trls_2   = trls_1(:,trls<pro_sign);
 tr_dat  =  disc_set'*tr_dat;
 tr_dat   =  tr_dat./( repmat(sqrt(sum(tr_dat.*tr_dat)), [par.nDim,1]) );
 
-tr_dat_3  =  disc_set'*tr_dat_2;
-tr_dat_4   =  tr_dat_3./( repmat(sqrt(sum(tr_dat_3.*tr_dat_3)), [par.nDim,1]) );
 
 % reference subset and variation subset of generic training set
 ge_dat = []; d_dat = [];ge_ls = []; ge_id = 1;
 for ci = pro_sign:249
-   cdat = fullMatrixFeaturesRightEyeSession1(:,labels==ci);
+   cdat = raw_data(:,labels==ci);
+   %cdat = DAT(:,labels==ci);
    if ~isempty(cdat)
       ge_dat = [ge_dat cdat(:,1:7) cdat(:,9:end)];
       ge_ls  = [ge_ls ge_id*ones(1,19)];
@@ -81,9 +77,11 @@ session  =  4;
 par.nameDatabase  =   ['mpie_s' num2str(session) '_SVDL'];
 load(['database/session' num2str(session) '_05_1_netural_all']);
 load('../../DataRetrieved/session4/featuresSession4.mat');
-fullMatrixFeaturesRightEyeSession4 = double(fullMatrixFeaturesMouseSession4);
+fullMatrixFeaturesSession4 = double(fullMatrixFeaturesMouseSession4);
+%DAT = double(DAT);
 labels(labels>213) = labels(labels>213) -1;
-tt_dat = fullMatrixFeaturesRightEyeSession4;
+tt_dat = fullMatrixFeaturesSession4;
+%tt_dat = DAT;
 ttls   = labels;
 tt_dat = tt_dat(:,ttls<pro_sign);
 ttls   = ttls(:,ttls<pro_sign);
