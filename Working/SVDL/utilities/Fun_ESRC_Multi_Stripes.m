@@ -51,7 +51,7 @@ for ti = 1:size(Test_M_right_eye,2)
         gap_mouse(ci) = er_mouse(:)'*er_mouse(:); % correspond à ei page5 du paper je pense ou alors un vecteur qui contint tout les ei
         gap_nose(ci) = er_nose(:)'*er_nose(:); % correspond à ei page5 du paper je pense ou alors un vecteur qui contint tout les ei
     end
-    gap = (0.75)*gap_right_eye + (0.55)*gap_mouse + (0.53)*gap_nose; % ATTENTION peut être il faudrait pondéré par la confiance que l'on peut accorder à chaque features ( les eyes ont eu de meilleurs résulats par exemple).
+    gap = gap_right_eye + gap_mouse + gap_nose; % ATTENTION peut être il faudrait pondéré par la confiance que l'on peut accorder à chaque features ( les eyes ont eu de meilleurs résulats par exemple).
     %keyboard;
     index = find(gap == min(gap)); % ne suffirait-il pas de sommmer les gaps de chacun des features et ensuite faire le min sur la somme ?
     ID(ti) = label(index(1));

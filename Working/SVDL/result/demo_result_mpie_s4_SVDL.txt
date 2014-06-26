@@ -67,9 +67,44 @@ Elapsed time is 260.923640 seconds.
 
 
 
-3 Stripes
+3 Stripes ALL RESULTS
 ========================================
 lambda1 = 0.001000lambda2 = 0.010000 lambda3= 0.000100
 nDim = 90.000000 lambda= 0.001000
 reco_rate1 = 0.884211
 Elapsed time is 810.148226 seconds.
+
+Only Eyes stripe
+========================================
+lambda1 = 0.001000lambda2 = 0.010000 lambda3= 0.000100
+nDim = 90.000000 lambda= 0.001000
+reco_rate1 = 0.771053
+Elapsed time is 309.098662 seconds.
+
+Only Mouse Stripe
+========================================
+lambda1 = 0.001000lambda2 = 0.010000 lambda3= 0.000100
+nDim = 90.000000 lambda= 0.001000
+reco_rate1 = 0.603289
+Elapsed time is 249.321482 seconds.
+
+Only Nose Stripe
+========================================
+lambda1 = 0.001000lambda2 = 0.010000 lambda3= 0.000100
+nDim = 90.000000 lambda= 0.001000
+reco_rate1 = 0.559211
+Elapsed time is 295.577808 seconds.
+
+with weighted gaps
+========================================
+lambda1 = 0.001000lambda2 = 0.010000 lambda3= 0.000100
+nDim = 90.000000 lambda= 0.001000
+reco_rate1 = 0.883553
+Elapsed time is 850.108688 seconds.
+
+without weight gap
+========================================
+lambda1 = 0.001000lambda2 = 0.010000 lambda3= 0.000100
+nDim = 90.000000 lambda= 0.001000
+reco_rate1 = 0.869079
+Elapsed time is 863.805147 seconds.
