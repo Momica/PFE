@@ -51,9 +51,27 @@ for ti = 1:size(Test_M_right_eye,2)
         gap_mouse(ci) = er_mouse(:)'*er_mouse(:); % correspond à ei page5 du paper je pense ou alors un vecteur qui contint tout les ei
         gap_nose(ci) = er_nose(:)'*er_nose(:); % correspond à ei page5 du paper je pense ou alors un vecteur qui contint tout les ei
     end
-    gap = gap_right_eye + gap_mouse + gap_nose; % ATTENTION peut être il faudrait pondéré par la confiance que l'on peut accorder à chaque features ( les eyes ont eu de meilleurs résulats par exemple).
+    gap_1 = (0.75)*gap_right_eye + (0.55)*gap_mouse + (0.53)*gap_nose; % ATTENTION peut être il faudrait pondéré par la confiance que l'on peut accorder à chaque features ( les eyes ont eu de meilleurs résulats par exemple).
+    gap_2 = (0.85)*gap_right_eye + (0.55)*gap_mouse + (0.53)*gap_nose;
+    gap_3 = (0.95)*gap_right_eye + (0.55)*gap_mouse + (0.53)*gap_nose;
+    gap_4 = (0.75)*gap_right_eye + (0.60)*gap_mouse + (0.53)*gap_nose;
+    gap_5 = (0.75)*gap_right_eye + (0.65)*gap_mouse + (0.53)*gap_nose;
+    gap_6 = (0.75)*gap_right_eye + (0.70)*gap_mouse + (0.53)*gap_nose;
+    gap_7 = (0.75)*gap_right_eye + (0.55)*gap_mouse + (0.60)*gap_nose;
+    gap_8 = (0.75)*gap_right_eye + (0.55)*gap_mouse + (0.65)*gap_nose;
+    gap_9 = (0.75)*gap_right_eye + (0.55)*gap_mouse + (0.70)*gap_nose;
     %keyboard;
-    index = find(gap == min(gap)); % ne suffirait-il pas de sommmer les gaps de chacun des features et ensuite faire le min sur la somme ?
-    ID(ti) = label(index(1));
+    for gapi=1:9
+        gap = strcat('gap',gapi);
+        disp(gap);
+        index = find(gap == min(gap)); % ne suffirait-il pas de sommmer les gaps de chacun des features et ensuite faire le min sur la somme ?
+        currentID = strcat('ID_',gapi);
+        disp(currentID);
+        currentID(ti) = label(index(1));
+    end
 end
-correct_rate = sum(ID==test_label)/length(test_label);
+for gapi=1:9
+    currentRate = strcat('correct_rate_',gapi);
+    disp(currentRate);
+    currentRate = sum(ID==test_label)/length(test_label);
+end

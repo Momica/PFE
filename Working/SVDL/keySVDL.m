@@ -42,24 +42,8 @@ for n = 1:length(features)
     ttls   = ttls(:,ttls<parameters.pro_sign);
     tt_dat  =  disc_set'*tt_dat;
 
-    %Train_Galleries = struct('Train_M_right_eye',[tr_dat_right_eye dict_v_right_eye],'Train_M_left_eye',[tr_dat_left_eye dict_v_left_eye]);
-    %Test_Sets = struct('tt_dat_right_eye',tt_dat_right_eye,'tt_dat_left_eye',tt_dat_lest_eye);
-
     % do classification
     correct_rate = Fun_ESRC([tr_dat dict_v],trls,tt_dat,ttls,parameters.lambda);
-
-
-% load('../../DataRetrieved/session1/featuresSession1.mat');
-% rightEyeSession1 = double(fullMatrixFeaturesRightEyeSession1);
-% leftEyeSession1 = double(fullMatrixFeaturesLeftEyeSession1);
-% mouseSession1 = double(fullMatrixFeaturesMouseSession1);
-% noseSession1 = double(fullMatrixFeaturesNoseSession1);
-% 
-% 
-% [dict_v,er,disc_set,tr_dat,trls] = generateSparseDictionnary(rightEyeSession1,parameters);
-% [dict_v_left_eye,er_left_eye,disc_set_left_eye,tr_dat_left_eye,trls] = generateSparseDictionnary(leftEyeSession1,parameters);
-% [dict_v_mouse,er_mouse,disc_set_mouse,tr_dat_mouse,trls] = generateSparseDictionnary(mouseSession1,parameters);
-% [dict_v_nose,er_nose,disc_set_nose,tr_dat_nose,trls] = generateSparseDictionnary(noseSession1,parameters);
 
 
 fid = fopen(['result/demo_result_' par.nameDatabase '.txt'],'a');
