@@ -15,7 +15,7 @@ clear all;
 clc;
 addpath utilities;
 addpath src;
-
+tic();
 %seting parameter
 pro_sign          =   100;        
 par.nDim          =   90;
@@ -27,8 +27,8 @@ dnum              =   400;
 
 load('database/session1_05_1_netural_all');
 %DAT = double(DAT);
-load('../../DataRetrieved/session1/featuresSession1.mat');
-raw_data = double(fullMatrixFeaturesRightEyeSession1);
+load('../../DataRetrieved/session1/featuresSession1Stripes.mat');
+raw_data = double(fullMatrixFeaturesRightEye);
 labels(labels>213) = labels(labels>213) -1; % there is no data with label 213, so we shift the label
 
 % gallery samples 
@@ -76,8 +76,8 @@ isShow   =  true;
 session  =  4;
 par.nameDatabase  =   ['mpie_s' num2str(session) '_SVDL'];
 load(['database/session' num2str(session) '_05_1_netural_all']);
-load('../../DataRetrieved/session4/featuresSession4.mat');
-fullMatrixFeaturesSession4 = double(fullMatrixFeaturesMouseSession4);
+load('../../DataRetrieved/session4/featuresSession4Stripes.mat');
+fullMatrixFeaturesSession4 = double(fullMatrixFeaturesRightEye);
 %DAT = double(DAT);
 labels(labels>213) = labels(labels>213) -1;
 tt_dat = fullMatrixFeaturesSession4;
@@ -96,3 +96,4 @@ fprintf(fid,'%s%8f%s%8f%s%8f\n','lambda1 = ',lambda1,'lambda2 = ',lambda2,' lamb
 fprintf(fid,'%s%8f%s%8f\n','nDim = ',par.nDim,' lambda= ',lambda);
 fprintf(fid,'%s%8f\n','reco_rate1 = ',correct_rate);
 fclose(fid);
+toc();
