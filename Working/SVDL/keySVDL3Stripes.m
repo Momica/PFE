@@ -14,17 +14,23 @@ parameters.lambda2           =   0.01;
 parameters.lambda3           =   1e-4;
 parameters.dnum              =   400;
 
+if exist('/Users/baptistemetge/Code/PFE/Git/PFE/DataRetrieved/session1/featuresSession1StripesDicos.mat') == 2
+    disp('hello');
+    load('/Users/baptistemetge/Code/PFE/Git/PFE/DataRetrieved/session1/featuresSession1StripesDicos.mat');
+    %dicos = fieldnames(dicoStructure);
+else
+    
+    load('../../DataRetrieved/session1/featuresSession1Stripes.mat');
+    rightEyeSession1 = double(fullMatrixFeaturesRightEye);
+    %leftEyeSession1 = double(fullMatrixFeaturesLeftEyeSession1);
+    mouseSession1 = double(fullMatrixFeaturesMouse);
+    noseSession1 = double(fullMatrixFeaturesNose);
 
-load('../../DataRetrieved/session1/featuresSession1Stripes.mat');
-rightEyeSession1 = double(fullMatrixFeaturesRightEye);
-%leftEyeSession1 = double(fullMatrixFeaturesLeftEyeSession1);
-mouseSession1 = double(fullMatrixFeaturesMouse);
-noseSession1 = double(fullMatrixFeaturesNose);
-
-[dict_v_right_eye,er_right_eye,disc_set_right_eye,tr_dat_right_eye,trls] = generateSparseDictionnary(rightEyeSession1,parameters);
-%[dict_v_left_eye,er_left_eye,disc_set_left_eye,tr_dat_left_eye,trls] = generateSparseDictionnary(leftEyeSession1,parameters);
-[dict_v_mouse,er_mouse,disc_set_mouse,tr_dat_mouse,trls] = generateSparseDictionnary(mouseSession1,parameters);
-[dict_v_nose,er_nose,disc_set_nose,tr_dat_nose,trls] = generateSparseDictionnary(noseSession1,parameters);
+    [dict_v_right_eye,er_right_eye,disc_set_right_eye,tr_dat_right_eye,trls] = generateSparseDictionnary(rightEyeSession1,parameters);
+    %[dict_v_left_eye,er_left_eye,disc_set_left_eye,tr_dat_left_eye,trls] = generateSparseDictionnary(leftEyeSession1,parameters);
+    [dict_v_mouse,er_mouse,disc_set_mouse,tr_dat_mouse,trls] = generateSparseDictionnary(mouseSession1,parameters);
+    [dict_v_nose,er_nose,disc_set_nose,tr_dat_nose,trls] = generateSparseDictionnary(noseSession1,parameters);
+end
 
 % load testing data
 session  =  4;

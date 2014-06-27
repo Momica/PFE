@@ -22,7 +22,7 @@ Test_M_nose   =  Test_M_nose./( repmat(sqrt(sum(Test_M_nose.*Test_M_nose)), [nDi
 cor_gap  = [];
 wro_gap  = [];
 
-for ti = 1:size(Test_M_right_eye,2)
+for ti = 1:size(Test_M_right_eye,2) % Pour chaque photo de test
     disp(num2str(ti));
     y_right_eye  = Test_M_right_eye(:,ti);
     %y_left_eye  = Test_M_left_eye(:,ti);
@@ -60,18 +60,36 @@ for ti = 1:size(Test_M_right_eye,2)
     gap_7 = (0.75)*gap_right_eye + (0.55)*gap_mouse + (0.60)*gap_nose;
     gap_8 = (0.75)*gap_right_eye + (0.55)*gap_mouse + (0.65)*gap_nose;
     gap_9 = (0.75)*gap_right_eye + (0.55)*gap_mouse + (0.70)*gap_nose;
+    
+    index = find(gap_1 == min(gap_1));
+    ID_1(ti) = label(index(1));
+    index = find(gap_2 == min(gap_2));
+    ID_2(ti) = label(index(1));
+    index = find(gap_3 == min(gap_3));
+    ID_3(ti) = label(index(1));
+    index = find(gap_4 == min(gap_4));
+    ID_4(ti) = label(index(1));
+    index = find(gap_5 == min(gap_5));
+    ID_5(ti) = label(index(1));
+    index = find(gap_6 == min(gap_6));
+    ID_6(ti) = label(index(1));
+    index = find(gap_7 == min(gap_7));
+    ID_7(ti) = label(index(1));
+    index = find(gap_8 == min(gap_8));
+    ID_8(ti) = label(index(1));
+    index = find(gap_9 == min(gap_9));
+    ID_9(ti) = label(index(1));
+
     %keyboard;
-    for gapi=1:9
-        gap = strcat('gap',gapi);
-        disp(gap);
-        index = find(gap == min(gap)); % ne suffirait-il pas de sommmer les gaps de chacun des features et ensuite faire le min sur la somme ?
-        currentID = strcat('ID_',gapi);
-        disp(currentID);
-        currentID(ti) = label(index(1));
-    end
 end
-for gapi=1:9
-    currentRate = strcat('correct_rate_',gapi);
-    disp(currentRate);
-    currentRate = sum(ID==test_label)/length(test_label);
+%correct_rate = sum(ID==test_label)/length(test_label);
+    correct_rate(1) = sum(ID_1==test_label)/length(test_label);
+    correct_rate(2) = sum(ID_2==test_label)/length(test_label);
+    correct_rate(3) = sum(ID_3==test_label)/length(test_label);
+    correct_rate(4) = sum(ID_4==test_label)/length(test_label);
+    correct_rate(5) = sum(ID_5==test_label)/length(test_label);
+    correct_rate(6) = sum(ID_6==test_label)/length(test_label);
+    correct_rate(7) = sum(ID_7==test_label)/length(test_label);
+    correct_rate(8) = sum(ID_8==test_label)/length(test_label);
+    correct_rate(9) = sum(ID_9==test_label)/length(test_label);
 end

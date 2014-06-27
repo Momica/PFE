@@ -28,4 +28,5 @@ for ti = 1:size(Test_M,2)
     index = find(gap == min(gap)); % ne suffirait-il pas de sommmer les gaps de chacun des features et ensuite faire le min sur la somme ?
     ID(ti) = label(index(1));
 end
+keyboard;
 correct_rate = sum(ID==test_label)/length(test_label);

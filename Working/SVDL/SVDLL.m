@@ -64,6 +64,7 @@ d_dat   =  d_dat./( repmat(sqrt(sum(d_dat.*d_dat)), [par.nDim,1]) );
 
 Xg   =  d_dat;   % The reference SubSet
 Yg   =  tr_dat;  % The Gallery 
+keyboard;
 for ti = 1:19
     X{ti} = ge_dat(:,ti:19:end);  % X{i} The ith variation generic training data
 end
