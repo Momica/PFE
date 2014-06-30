@@ -25,7 +25,13 @@ disp(tLine);
 fullMatrixFeaturesRightEye = [];
 fullMatrixFeaturesLeftEye = [];
 fullMatrixFeaturesNose = [];
-fullMatrixFeaturesMouse = [];
+fullMatrixFeaturesBetweenEye = [];
+fullMatrixEyeBrowRight = [];
+fullMatrixEyeBrowLeft = [];
+fullMatrixFeaturesNoseRight = [];
+fullMatrixFeaturesNoseLeft = [];
+fullMatrixFeaturesMouseRight = [];
+fullMatrixFeaturesMouseLeft = [];
 
 %fea=zeros(34515,9871);
 idImage=0;
@@ -54,7 +60,7 @@ while tLine~=-1
     end
     
     %create a destination directory per person
-    personDestDir = strcat('../DataRetrieved/session4/features/',personID); %sprintf('%03d',fix((idImage-1)/20)+1));
+    personDestDir = strcat('../DataRetrieved/session4/featuresMany/',personID); %sprintf('%03d',fix((idImage-1)/20)+1));
     disp(personDestDir);
     if not(exist(personDestDir))
         disp('person folder does not exist');
@@ -92,46 +98,112 @@ while tLine~=-1
         disp('boucle for');
         %imfea = imcrop(npic,[npicLandmark(2*i-1)-15 npicLandmark(2*i)-15 30 30]);
         if i == 1
+            % right eye
             imfea = imcrop(npic,[npicLandmark(2*i-1)-20 npicLandmark(2*i)-25 50 50]);
             sizeFea = size(imfea);
             imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
             fullMatrixFeaturesRightEye(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',1),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+            
+            % between eye
+            betweenEyesDistance = npicLandmark(2*(i+1)-1) - npicLandmark(2*i-1);
+            imfea = imcrop(npic,[npicLandmark(2*i-1)+(betweenEyesDistance/2)-25 npicLandmark(2*i)-30 50 40]);
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesBetweenEye(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',2),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+            
+            % right eyebrow
+            imfea = imcrop(npic,[npicLandmark(2*i-1)-20 npicLandmark(2*i)-35 55 30]);
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixEyeBrowRight(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',3),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
         end
         if i == 2
+            % left eye
             imfea = imcrop(npic,[npicLandmark(2*i-1)-25 npicLandmark(2*i)-25 50 50]);
             sizeFea = size(imfea);
             imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
             fullMatrixFeaturesLeftEye(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',4),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+            
+            % left eyebrow
+            imfea = imcrop(npic,[npicLandmark(2*i-1)-25 npicLandmark(2*i)-35 55 30]);
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixEyeBrowLeft(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',5),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
         end
         if i == 3
-            imfea = imcrop(npic,[npicLandmark(2*i-1)-25 npicLandmark(2*i)-40 50 65]);
+            % Nose
+            imfea = imcrop(npic,[npicLandmark(2*i-1)-25 npicLandmark(2*i)-28 50 52]);
             sizeFea = size(imfea);
             imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
             fullMatrixFeaturesNose(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
-        end
-        if i == 4
-            % UNCOMMENT if you want perfect features extraction around the
-            % mouse, but the problem is that it will then produce different
-            % features size and then it will be tough to compare them
-%             lengthMouse = npicLandmark((2*(i+1))-1) - npicLandmark((2*i)-1);
-%             heightMouse = npicLandmark((2*(i+1))) - npicLandmark((2*i));
-%             disp(lengthMouse);
-%             imfea = imcrop(npic,[(npicLandmark(2*i-1))-15 (npicLandmark(2*i))-15 lengthMouse+30 heightMouse+30]); % ATTENTION ici il faudra utiliser un autre cropping
-            imfea = imcrop(npic,[(npicLandmark(2*i-1))-15 (npicLandmark(2*i))-20 100 35]);
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',6),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+            
+            % Right Nose
+            imfea = imcrop(npic,[npicLandmark(2*i-1)-50 npicLandmark(2*i)-28 50 52]);
             sizeFea = size(imfea);
             imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
-            fullMatrixFeaturesMouse(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            fullMatrixFeaturesNoseRight(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',7),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+            
+            % Left Nose 
+            imfea = imcrop(npic,[npicLandmark(2*i-1) npicLandmark(2*i)-28 50 52]);
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesNoseLeft(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',8),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+        end
+        if i == 4
+            % Right Mouse
+            lengthWantedForFeature = 106;
+            lengthMouse = npicLandmark((2*(i+1))-1) - npicLandmark((2*i)-1);
+            extraSpace = (lengthWantedForFeature-lengthMouse)/2;
+            imfea = imcrop(npic,[(npicLandmark(2*(i)-1))-extraSpace (npicLandmark(2*(i)))-20 lengthWantedForFeature/2 40]); 
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesMouseRight(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',9),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+            
+
         end
         if i == 5
             %imfea = imcrop(npic,[npicLandmark(2*i-1)-15 npicLandmark(2*i)-15 30 30]);
-            continue;
-        end
+            % Left Mouse
+            imfea = imcrop(npic,[(npicLandmark(2*(i)-1))-(lengthMouse/2) (npicLandmark(2*(i)))-20 lengthWantedForFeature/2 40]);
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesMouseLeft(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',10),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);        end
         % UNCOMMENT if you want to display the key features
 %         figure;   
 %         imshow(imfea);
-        feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',i),'.png');
-        disp(feaName);
-        imwrite(imfea,feaName);
+%         feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',i),'.png');
+%         disp(feaName);
+%         imwrite(imfea,feaName);
     end
     
     
