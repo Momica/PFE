@@ -25,27 +25,30 @@ end
 
 for ti = 1:size(tt_dat{1,1},2) % For each test picture
     disp(num2str(ti));
-    for n=1 : sizeDicos % For each kind of key feature
-        Test_M = tt_dat{1,n};
-        Train_M = dicos{1,n}.Train_M;
-        y{n}  = Test_M(:,ti);
-        [currentX, nIter] = SolveDALM(Train_M,y{n}, 'lambda',lambda,'tolerance',1e-3); % SolveDALM correspond à Dual Augmented Lagrange Multiplier
-        x{n} = currentX;
-        y_add{n} = Train_M(:,nNum+1:end)*x{n}(nNum+1:end,1);
-    end
-    
-    for ci = 1:nCls % For each person ID
-        class = label(ci);
-        gap(ci) = 0;
+    test = rem((ti-8),20);
+    if test ~= 0
         for n=1 : sizeDicos % For each kind of key feature
+            Test_M = tt_dat{1,n};
             Train_M = dicos{1,n}.Train_M;
-            cdat = Train_M(:,train_label==class);
-            er   = y{n} - cdat*x{n}(train_label==class) - y_add{n};
-            gap(ci) = gap(ci) + (dicos{1,n}.weight)*(er(:)'*er(:)); % On somme les gaps de chacune des features / ATTENTION mettre les weight ici !!!
+            y{n}  = Test_M(:,ti);
+            [currentX, nIter] = SolveDALM(Train_M,y{n}, 'lambda',lambda,'tolerance',1e-3); % SolveDALM correspond à Dual Augmented Lagrange Multiplier
+            x{n} = currentX;
+            y_add{n} = Train_M(:,nNum+1:end)*x{n}(nNum+1:end,1);
         end
+
+        for ci = 1:nCls % For each person ID
+            class = label(ci);
+            gap(ci) = 0;
+            for n=1 : sizeDicos % For each kind of key feature
+                Train_M = dicos{1,n}.Train_M;
+                cdat = Train_M(:,train_label==class);
+                er   = y{n} - cdat*x{n}(train_label==class) - y_add{n};
+                gap(ci) = gap(ci) + (dicos{1,n}.weight)*(er(:)'*er(:)); % On somme les gaps de chacune des features / ATTENTION mettre les weight ici !!!
+            end
+        end
+        index = find(gap == min(gap)); % ne suffirait-il pas de sommmer les gaps de chacun des features et ensuite faire le min sur la somme ?
+        ID(ti) = label(index(1));
     end
-    index = find(gap == min(gap)); % ne suffirait-il pas de sommmer les gaps de chacun des features et ensuite faire le min sur la somme ?
-    ID(ti) = label(index(1));
 end
 %keyboard;
 

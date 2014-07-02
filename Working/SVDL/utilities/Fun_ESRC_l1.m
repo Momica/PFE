@@ -17,16 +17,10 @@ wro_gap  = [];
 for ti = 1:size(Test_M,2)
     disp(num2str(ti));
     y  = Test_M(:,ti);
-%     [x,status] = l1_ls(Train_M,y,lambda,1e-3,true);
-%     [x, nIter] = SolveDALM(Train_M,y, 'lambda',lambda,'tolerance',1e-3);
     [x, nIter] = SolveDALM([Train_M eye(size(Train_M,1))],y, 'lambda',lambda,'tolerance',1e-3);
-%     [x, nIter] = SolveDALM_fast(Train_M,y, 'lambda',lambda,'tolerance',1e-3);
-%     y_add = Train_M(:,nNum+1:end)*x(nNum+1:end,1);
     for ci = 1:nCls
         class = label(ci);
         cdat = Train_M(:,train_label==class);
-%         er   = y - cdat*x(train_label==class);
-%         er   = y - cdat*x(train_label==class) - y_add;
         er   = y - cdat*x(train_label==class) -...
             Train_M(:,nNum+1:size(Train_M,2))*x(nNum+1:size(Train_M,2),1)-...
             x(size(Train_M,2)+1:end,1);

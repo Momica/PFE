@@ -19,4 +19,9 @@ DataRetrieved/session1/featuresSession1Many.mat
 DataRetrieved/session1/featuresSession1ManyDicos.mat
 DataRetrieved/session1/featuresSession1StripesDicosOLD.mat
 DataRetrieved/session4/featuresSession4Many.mat
+DataRetrieved/session1/block_occlusion/
+DataRetrieved/session1/block_occlusion_old/
+DataRetrieved/session1/block_occlusion_save/
+Working/SVDL/demo_mpie_svdl_block_modif.m
+Working/cropFea.m
 	
