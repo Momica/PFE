@@ -122,8 +122,9 @@ end
 
 for n = 1:length(testFeatures)
     currentdicos{1,1} = dicos{1,n};
-    current_tt_dat{1} = my_tt_dat{n};
-    correct_rate = Fun_ESRC_gaps_block(currentdicos,current_tt_dat,ttls,parameters.lambda);
+    current_tt_dat = my_tt_dat{n};
+    Train_M = [dicos{1,n}.tr_dat dicos{1,n}.dict_v];
+    correct_rate = Fun_ESRC_block(Train_M,dicos{1,n}.trls, current_tt_dat,ttls,parameters.lambda);
     %fid = fopen(['result/demo_result_' par.nameDatabase '.txt'],'a');
     %fid = fopen(['result/demo_result.txt'],'a');
     %fprintf(fid,'\n%s\n','========================================');
