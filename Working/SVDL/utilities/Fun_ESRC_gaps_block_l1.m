@@ -31,7 +31,7 @@ for ti = 1:size(tt_dat{1,1},2) % For each test picture
             Test_M = tt_dat{1,n};
             Train_M = dicos{1,n}.Train_M;
             y{n}  = Test_M(:,ti);
-            [currentX, nIter] = SolveDALM(Train_M,y{n}, 'lambda',lambda,'tolerance',1e-3); % SolveDALM correspond à Dual Augmented Lagrange Multiplier
+            [currentX, nIter] = SolveDALM([Train_M eye(size(Train_M,1))],y{n}, 'lambda',lambda,'tolerance',1e-3); % SolveDALM correspond à Dual Augmented Lagrange Multiplier
             x{n} = currentX;
             %y_add{n} = Train_M(:,nNum+1:end)*x{n}(nNum+1:end,1);
         end
@@ -45,7 +45,6 @@ for ti = 1:size(tt_dat{1,1},2) % For each test picture
                 er   = y{n} - cdat*x{n}(train_label==class);
                 er = er - Train_M(:,nNum+1:size(Train_M,2))*x{n}(nNum+1:size(Train_M,2),1);
                 testv = x{1,n}(size(Train_M,2)+1:end,1);
-                keyboard;
                 er = er - x{n}(size(Train_M,2)+1:end,1);                
                 gap(ci) = gap(ci) + (dicos{1,n}.weight)*(er(:)'*er(:)); % On somme les gaps de chacune des features / ATTENTION mettre les weight ici !!!
             end
@@ -54,6 +53,5 @@ for ti = 1:size(tt_dat{1,1},2) % For each test picture
         ID(ti) = label(index(1));
     end
 end
-%keyboard;
 
 correct_rate = sum(ID==test_label)/length(test_label);

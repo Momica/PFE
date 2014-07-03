@@ -15,7 +15,7 @@ parameters.lambda1           =   0.001;
 parameters.lambda2           =   0.01;
 parameters.lambda3           =   1e-4;
 parameters.dnum              =   400;
-block_l = 0.2; % block level
+block_l = 0.4; % block level
 
 load('./SVDL/database/session1_05_1_netural_all');
 

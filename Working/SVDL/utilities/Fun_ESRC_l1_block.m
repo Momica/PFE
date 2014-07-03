@@ -23,9 +23,9 @@ for ti = 1:size(Test_M,2)
         for ci = 1:nCls
             class = label(ci);
             cdat = Train_M(:,train_label==class);
-            er   = y - cdat*x(train_label==class) -...
-                Train_M(:,nNum+1:size(Train_M,2))*x(nNum+1:size(Train_M,2),1)-...
-                x(size(Train_M,2)+1:end,1);
+            er   = y - cdat*x(train_label==class);
+            er = er - Train_M(:,nNum+1:size(Train_M,2))*x(nNum+1:size(Train_M,2),1);
+            er = er - x(size(Train_M,2)+1:end,1);
             gap(ci) = er(:)'*er(:);
         end
         index = find(gap == min(gap));
