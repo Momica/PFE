@@ -132,3 +132,7 @@ lambda1 = 0.001000lambda2 = 0.010000 lambda3= 0.000100
 nDim = 90.000000 lambda= 0.001000
 reco_rate1 = 0.877632
 Elapsed time is 104.339374 seconds.
+========================================
+lambda1 = 0.001000lambda2 = 0.010000 lambda3= 0.000100
+nDim = 90.000000 lambda= 0.001000
+reco_rate1 = 0.903289

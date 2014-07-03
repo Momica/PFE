@@ -122,8 +122,9 @@ end
 
 for n = 1:length(testFeatures)
     currentdicos{1,1} = dicos{1,n};
-    current_tt_dat{1} = my_tt_dat{n};
-    correct_rate = Fun_ESRC_gaps_block(currentdicos,current_tt_dat,ttls,parameters.lambda);
+    current_tt_dat = my_tt_dat{n};
+    Train_M = [dicos{1,n}.tr_dat dicos{1,n}.dict_v];
+    correct_rate = Fun_ESRC_l1_block(Train_M,dicos{1,n}.trls, current_tt_dat,ttls,parameters.lambda);
     %fid = fopen(['result/demo_result_' par.nameDatabase '.txt'],'a');
     %fid = fopen(['result/demo_result.txt'],'a');
     %fprintf(fid,'\n%s\n','========================================');
@@ -134,9 +135,9 @@ for n = 1:length(testFeatures)
     %fclose(fid);
 end
 
-correct_rate = Fun_ESRC_gaps_block(dicos,my_tt_dat,ttls,parameters.lambda);
+correct_rate = Fun_ESRC_gaps_block_l1(dicos,my_tt_dat,ttls,parameters.lambda);
 %fid = fopen(['result/demo_result_' par.nameDatabase '.txt'],'a');
-fid = fopen(['./SVDL/result/demo_result_block.txt'],'a');
+fid = fopen(['./SVDL/result/demo_result_block_norme1.txt'],'a');
 fprintf(fid,'\n======= Occlusion %8f percent ========\n',100*block_l)
 for n = 1:length(testFeatures)
     fprintf(fid,'%s%8f%s%8f\n','weight ',n,' = ', dicos{1,n}.weight);

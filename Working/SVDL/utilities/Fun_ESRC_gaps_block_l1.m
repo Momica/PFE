@@ -1,4 +1,4 @@
-function correct_rate = Fun_ESRC_gaps_block(dicos,tt_dat,test_label,lambda)
+function correct_rate = Fun_ESRC_gaps_block_l1(dicos,tt_dat,test_label,lambda)
 addpath ./SVDL/utilities;
 
 
@@ -33,7 +33,7 @@ for ti = 1:size(tt_dat{1,1},2) % For each test picture
             y{n}  = Test_M(:,ti);
             [currentX, nIter] = SolveDALM(Train_M,y{n}, 'lambda',lambda,'tolerance',1e-3); % SolveDALM correspond à Dual Augmented Lagrange Multiplier
             x{n} = currentX;
-            y_add{n} = Train_M(:,nNum+1:end)*x{n}(nNum+1:end,1);
+            %y_add{n} = Train_M(:,nNum+1:end)*x{n}(nNum+1:end,1);
         end
 
         for ci = 1:nCls % For each person ID
@@ -42,7 +42,11 @@ for ti = 1:size(tt_dat{1,1},2) % For each test picture
             for n=1 : sizeDicos % For each kind of key feature
                 Train_M = dicos{1,n}.Train_M;
                 cdat = Train_M(:,train_label==class);
-                er   = y{n} - cdat*x{n}(train_label==class) - y_add{n};
+                er   = y{n} - cdat*x{n}(train_label==class);
+                er = er - Train_M(:,nNum+1:size(Train_M,2))*x{n}(nNum+1:size(Train_M,2),1);
+                testv = x{1,n}(size(Train_M,2)+1:end,1);
+                keyboard;
+                er = er - x{n}(size(Train_M,2)+1:end,1);                
                 gap(ci) = gap(ci) + (dicos{1,n}.weight)*(er(:)'*er(:)); % On somme les gaps de chacune des features / ATTENTION mettre les weight ici !!!
             end
         end

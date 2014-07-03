@@ -1,0 +1,9 @@
+
+======= Occlusion 10.000000 percent ========
+reco_rate1 = 0.851143
+
+======= Occlusion 20.000000 percent ========
+reco_rate1 = 0.720362
+
+======= Occlusion 30.000000 percent ========
+reco_rate1 = 0.608719

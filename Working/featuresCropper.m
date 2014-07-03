@@ -1,5 +1,5 @@
 % goal : read feature coordinnates and extract them normalized
-function featuresCropper (landmarkTxt,subjectDir,nameForSavingResult)
+function featuresCropper (landmarkTxt,subjectDir,destinationDir,nameForSavingResult)
 
     % set the mean face for the normalization
     idimage_name = 'dictionary/idimage200'; % modify here if you want an other mean face
@@ -66,7 +66,7 @@ function featuresCropper (landmarkTxt,subjectDir,nameForSavingResult)
         end
 
         %create a destination directory per person
-        personDestDir = strcat('../DataRetrieved/session1/block_occlusion/features/',personID); %sprintf('%03d',fix((idImage-1)/20)+1));
+        personDestDir = strcat(destinationDir,personID); %sprintf('%03d',fix((idImage-1)/20)+1));
         disp(personDestDir);
         if not(exist(personDestDir))
             disp('person folder does not exist');
