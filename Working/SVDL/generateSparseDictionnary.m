@@ -23,7 +23,7 @@ dnum              =   parameters.dnum;
 
 
 % load des labels
-load('database/session1_05_1_netural_all');
+load('./SVDL/database/session1_05_1_netural_all');
 %DAT = double(DAT);
 %load('../../DataRetrieved/session1/featuresSession1.mat');
 %raw_data = double(fullMatrixFeaturesRightEyeSession1);

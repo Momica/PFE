@@ -1,4 +1,4 @@
-% goal : read feature coordinnates and extract them normalized
+% goal : read feature coordinnates and crop them normalized
 clc;
 clear all;
 close all;

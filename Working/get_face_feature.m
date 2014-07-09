@@ -67,8 +67,7 @@ for i = 1:landmarknum
          tim = im(gridY(ii)-opl:gridYend(ii)+opl,gridX(ii)-opl:gridXend(ii)+opl);%
          feature((i-1)*onePatchNum+ii,:) = lbp(tim,2,8,mapping,mode);
 %         rectangle('Position',[gridX(ii),gridY(ii),patchSize,patchSize],'Curvature',[0 0],'EdgeColor','g');
-     end
-     
+     end     
 end
 
 %% hog
