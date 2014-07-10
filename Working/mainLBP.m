@@ -192,9 +192,7 @@ numberOfImage = sizeFullVectorLBP(2);
 
 
 labels(labels>213) = labels(labels>213) -1; % there is no data with label 213, so we shift the label
-keyboard;
 for n=1:dividerLBP % remplacer 20 par une varialble à terme
-    % Generate SVDL on current feature
     currentTestFeature = fullMatrixFeaturesLBPTest((n-1)*sizeFeature+1:n*sizeFeature,:);
     currentTestFeature = double(currentTestFeature);
     
@@ -204,7 +202,6 @@ for n=1:dividerLBP % remplacer 20 par une varialble à terme
     ttls   = ttls(:,ttls<parameters.pro_sign);
     my_tt_dat{n}  = dicos{1,n}.disc_set'*my_tt_dat{n};
 end
-keyboard;
 % testFeatures = fieldnames(testFeaturesStructure.savingResult);
 % 
 % for n = 1:length(testFeatures)
@@ -220,10 +217,13 @@ keyboard;
 % end
 
 for n = 1:dividerLBP
+%     currentdicos{1,1} = dicos{1,n};
+%     current_tt_dat = my_tt_dat{n};
+%     Train_M = [dicos{1,n}.tr_dat dicos{1,n}.dict_v];
+%     correct_rate = Fun_ESRC_gaps(Train_M,dicos{1,n}.trls, current_tt_dat,ttls,parameters.lambda);
     currentdicos{1,1} = dicos{1,n};
-    current_tt_dat = my_tt_dat{n};
-    Train_M = [dicos{1,n}.tr_dat dicos{1,n}.dict_v];
-    correct_rate = Fun_ESRC_block(Train_M,dicos{1,n}.trls, current_tt_dat,ttls,parameters.lambda);
+    current_tt_dat{1} = my_tt_dat{n};
+    correct_rate = Fun_ESRC_gaps(currentdicos,current_tt_dat,ttls,parameters.lambda);
     %fid = fopen(['result/demo_result_' par.nameDatabase '.txt'],'a');
     %fid = fopen(['result/demo_result.txt'],'a');
     %fprintf(fid,'\n%s\n','========================================');
@@ -233,8 +233,8 @@ for n = 1:dividerLBP
     dicos{1,n}.weight = correct_rate;
     %fclose(fid);
 end
-
-correct_rate = Fun_ESRC_gaps_block(dicos,my_tt_dat,ttls,parameters.lambda);
+keyboard;
+correct_rate = Fun_ESRC_gaps(dicos,my_tt_dat,ttls,parameters.lambda);
 keyboard;
 resultFileName = strcat('./SVDL/result/demo_result_LBP_',int2str(dividerLBP),'.txt');
 disp(resultFileName);
