@@ -31,4 +31,11 @@ DataRetrieved/session1/LBP.mat
 DataRetrieved/session1/featuresSession1LBP.mat
 DataRetrieved/session4/LBP.mat
 DataRetrieved/session4/featuresSession4LBP.mat
-
+DataRetrieved/session1/19features/*
+DataRetrieved/session1/19featuresSession1.mat
+DataRetrieved/session1/19featuresSession1Dicos.mat
+DataRetrieved/session1/1featuresSession1LBPDicos.mat
+DataRetrieved/session1/GRIDfeatures/*
+DataRetrieved/session1/GRIDfeaturesSession1.mat
+DataRetrieved/session4/19features/*
+DataRetrieved/session4/19featuresSession4.mat

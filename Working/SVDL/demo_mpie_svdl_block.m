@@ -59,7 +59,7 @@ isShow   =  true;
 
 % generate the block-occluded image
 load('database/session1_05_1_netural_all');
-block_l = 0.3; % block level
+block_l = 0.175; % block level
 im_h    = 25;
 im_w    = 20;
 height  = floor(sqrt(im_h*im_w*block_l));
@@ -95,7 +95,7 @@ tt_dat = tem_dat;
 correct_rate = Fun_ESRC_l1([tr_dat dict_v],trls,tt_dat,ttls,lambda);
 
 fid = fopen(['result/demo_result_' par.nameDatabase '.txt'],'a');
-fprintf(fid,'\n%s\n','=================30%=======================');
+fprintf(fid,'\n%s\n','=================17,5%=======================');
 fprintf(fid,'%s%8f%s%8f%s%8f\n','lambda1 = ',lambda1,'lambda2 = ',lambda2,' lambda3= ',lambda3);
 fprintf(fid,'%s%8f%s%8f\n','nDim = ',par.nDim,' lambda= ',lambda);
 fprintf(fid,'%s%8f\n','reco_rate1 = ',correct_rate);

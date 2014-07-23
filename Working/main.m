@@ -13,9 +13,9 @@ addpath('meanface');  % Add the folder "meanface" to the path
 mode = 'h';
 %imread('features/images/001/001_03_01_041_00.png');
 %keyboard;
-landmarkDir='../DataRetrieved/session4/landmarksFace.txt';
+landmarkDir='../DataRetrieved/session1/landmarksFace.txt';
 %foundNotFoundDir='features/indexingFoundNotFound.txt';
-subjectDir='../DataRetrieved/session4/full_face';
+subjectDir='../DataRetrieved/session1/full_face';
 fLandmark=fopen(landmarkDir,'r');
 %fFound=fopen(foundNotFoundDir,'r');
 tLine=fgetl(fLandmark);
@@ -32,6 +32,15 @@ fullMatrixFeaturesNoseRight = [];
 fullMatrixFeaturesNoseLeft = [];
 fullMatrixFeaturesMouseRight = [];
 fullMatrixFeaturesMouseLeft = [];
+fullMatrixFeaturesMouseCenter = [];
+fullMatrixFeaturesFrontHeadLeft = [];
+fullMatrixFeaturesFrontHeadCenter = [];
+fullMatrixFeaturesFrontHeadRight = [];
+fullMatrixFeaturesCheekRightUpper = [];
+fullMatrixFeaturesCheekRightDown = [];
+fullMatrixFeaturesCheekLeftUpper = [];
+fullMatrixFeaturesCheekLeftDown = [];
+fullMatrixFeaturesChin = [];
 
 %fea=zeros(34515,9871);
 idImage=0;
@@ -60,7 +69,7 @@ while tLine~=-1
     end
     
     %create a destination directory per person
-    personDestDir = strcat('../DataRetrieved/session4/featuresMany/',personID); %sprintf('%03d',fix((idImage-1)/20)+1));
+    personDestDir = strcat('../DataRetrieved/session1/19features/',personID); %sprintf('%03d',fix((idImage-1)/20)+1));
     disp(personDestDir);
     if not(exist(personDestDir))
         disp('person folder does not exist');
@@ -125,6 +134,33 @@ while tLine~=-1
             feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',3),'.png');
             disp(feaName);
             imwrite(imfea,feaName);
+            
+            % fronthead Left
+            imfea = imcrop(npic,[npicLandmark(2*i-1)+(betweenEyesDistance/2)-35 npicLandmark(2*i)-38 23 19]);
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesFrontHeadLeft(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',4),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);  
+            
+            % fronthead Center
+            imfea = imcrop(npic,[npicLandmark(2*i-1)+(betweenEyesDistance/2)-35+23 npicLandmark(2*i)-38 23 19]);
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesFrontHeadCenter(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',5),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+            
+            % fronthead Right
+            imfea = imcrop(npic,[npicLandmark(2*i-1)+(betweenEyesDistance/2)-35+23+23 npicLandmark(2*i)-38 23 19]);
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesFrontHeadRight(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',6),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
         end
         if i == 2
             % left eye
@@ -132,7 +168,7 @@ while tLine~=-1
             sizeFea = size(imfea);
             imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
             fullMatrixFeaturesLeftEye(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
-            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',4),'.png');
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',7),'.png');
             disp(feaName);
             imwrite(imfea,feaName);
             
@@ -141,7 +177,7 @@ while tLine~=-1
             sizeFea = size(imfea);
             imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
             fullMatrixEyeBrowLeft(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
-            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',5),'.png');
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',8),'.png');
             disp(feaName);
             imwrite(imfea,feaName);
         end
@@ -151,7 +187,7 @@ while tLine~=-1
             sizeFea = size(imfea);
             imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
             fullMatrixFeaturesNose(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
-            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',6),'.png');
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',9),'.png');
             disp(feaName);
             imwrite(imfea,feaName);
             
@@ -160,7 +196,7 @@ while tLine~=-1
             sizeFea = size(imfea);
             imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
             fullMatrixFeaturesNoseRight(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
-            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',7),'.png');
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',10),'.png');
             disp(feaName);
             imwrite(imfea,feaName);
             
@@ -169,7 +205,43 @@ while tLine~=-1
             sizeFea = size(imfea);
             imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
             fullMatrixFeaturesNoseLeft(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
-            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',8),'.png');
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',11),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+            
+            % Upper Right Cheek
+            imfea = imcrop(npic,[npicLandmark(2*i-1)-55 npicLandmark(2*i)-25 30 30]);
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesCheekRightUpper(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',12),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+            
+            % Down Right Cheek
+            imfea = imcrop(npic,[npicLandmark(2*i-1)-55 npicLandmark(2*i)+5 30 30]);
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesCheekRightDown(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',13),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+            
+            % Upper Left Cheek 
+            imfea = imcrop(npic,[npicLandmark(2*i-1)+25 npicLandmark(2*i)-25 30 30]);
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesCheekLeftUpper(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',14),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+                        
+            % Down Left Cheek
+            imfea = imcrop(npic,[npicLandmark(2*i-1)+25 npicLandmark(2*i)+5 30 30]);
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesCheekLeftDown(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',15),'.png');
             disp(feaName);
             imwrite(imfea,feaName);
         end
@@ -182,7 +254,27 @@ while tLine~=-1
             sizeFea = size(imfea);
             imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
             fullMatrixFeaturesMouseRight(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
-            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',9),'.png');
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',16),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);
+            
+            % Center Mouse
+            imfea = imcrop(npic,[(npicLandmark(2*(i)-1))+(lengthMouse/2)-20 (npicLandmark(2*(i)))-20 40 35]); 
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesMouseCenter(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',17),'.png');
+            disp(feaName);
+            imwrite(imfea,feaName);  
+            
+            % Chin
+            %imfea = imcrop(npic,[(npicLandmark(2*(i)-1))+(lengthMouse/2)-35 (npicLandmark(2*(i)))+5 70 20]); 
+            sizeImg = size(npic);
+            imfea = imcrop(npic,[(npicLandmark(2*(i)-1))+(lengthMouse/2)-35 sizeImg(1)-25 70 20]); 
+            sizeFea = size(imfea);
+            imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
+            fullMatrixFeaturesChin(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',18),'.png');
             disp(feaName);
             imwrite(imfea,feaName);
             
@@ -195,7 +287,7 @@ while tLine~=-1
             sizeFea = size(imfea);
             imFeaMatrix = reshape(imfea,sizeFea(1)*sizeFea(2),1);
             fullMatrixFeaturesMouseLeft(:,idImage)=imFeaMatrix ; %ATTENTION declarer avec la taille connu pour gagner en vitesse
-            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',10),'.png');
+            feaName = strcat(keyFeaturesDir,'/',personID,'_',sprintf('%04d',idImage),'_',sprintf('%02d',19),'.png');
             disp(feaName);
             imwrite(imfea,feaName);        end
         % UNCOMMENT if you want to display the key features
@@ -223,6 +315,9 @@ while tLine~=-1
     %tFound=fgetl(fFound);
     %disp(tLine);
 end
+%newFeatures = struct('fullMatrixEyeBrowLeft',fullMatrixEyeBrowLeft,'fullMatrixEyeBrowRight',fullMatrixEyeBrowRight,'fullMatrixFeaturesBetweenEye',fullMatrixFeaturesBetweenEye,'fullMatrixFeaturesCheekLeftDown',fullMatrixFeaturesCheekLeftDown,'fullMatrixFeaturesCheekLeftUpper',fullMatrixFeaturesCheekLeftUpper,'fullMatrixFeaturesCheekRightDown',fullMatrixFeaturesCheekRightDown,'fullMatrixFeaturesCheekRightUpper',fullMatrixFeaturesCheekRightUpper,'fullMatrixFeaturesChin',fullMatrixFeaturesChin,'fullMatrixFeaturesFrontHeadCenter',fullMatrixFeaturesFrontHeadCenter,'fullMatrixFeaturesFrontHeadLeft',fullMatrixFeaturesFrontHeadLeft,'fullMatrixFeaturesFrontHeadRight',fullMatrixFeaturesFrontHeadRight,'fullMatrixFeaturesLeftEye',fullMatrixFeaturesLeftEye,'fullMatrixFeaturesMouseCenter',fullMatrixFeaturesMouseCenter,'fullMatrixFeaturesMouseLeft',fullMatrixFeaturesMouseLeft,'fullMatrixFeaturesMouseRight',fullMatrixFeaturesMouseRight,'fullMatrixFeaturesNose',fullMatrixFeaturesNose,'fullMatrixFeaturesNoseLeft',fullMatrixFeaturesNoseLeft,'fullMatrixFeaturesNoseRight',fullMatrixFeaturesNoseRight,'fullMatrixFeaturesRightEye',fullMatrixFeaturesRightEye);
+newFeaturesName = '../DataRetrieved/session1/19featuresSession1.mat';
+save(newFeaturesName,'fullMatrixEyeBrowLeft','fullMatrixEyeBrowRight','fullMatrixFeaturesBetweenEye','fullMatrixFeaturesCheekLeftDown','fullMatrixFeaturesCheekLeftUpper','fullMatrixFeaturesCheekRightDown','fullMatrixFeaturesCheekRightUpper','fullMatrixFeaturesChin','fullMatrixFeaturesFrontHeadCenter','fullMatrixFeaturesFrontHeadLeft','fullMatrixFeaturesFrontHeadRight','fullMatrixFeaturesLeftEye','fullMatrixFeaturesMouseCenter','fullMatrixFeaturesMouseLeft','fullMatrixFeaturesMouseRight','fullMatrixFeaturesNose','fullMatrixFeaturesNoseLeft','fullMatrixFeaturesNoseRight','fullMatrixFeaturesRightEye');
 %save('Images\EncodingImagesData\feaMetrix.mat','fea');
 
 

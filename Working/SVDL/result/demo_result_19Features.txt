@@ -1,0 +1,44 @@
+
+========================================
+weight 1.000000 = 0.676974 % right eye
+weight 2.000000 = 0.603289 % left eye
+weight 3.000000 = 0.559211 % nose
+weight 4.000000 = 0.536184 % between eye
+weight 5.000000 = 0.539474 % eye brow right
+weight 6.000000 = 0.555263 % eye brow left 
+weight 7.000000 = 0.488158 % nose right
+weight 8.000000 = 0.520395 % nose left
+weight 9.000000 = 0.571711 % mouse right
+weight 10.000000 = 0.544079 % mouse left
+weight 11.000000 = 0.483553 % mouse center
+weight 12.000000 = 0.297368 % front head left
+weight 13.000000 = 0.176316 % front haed center 
+weight 14.000000 = 0.267763 % front head right
+weight 15.000000 = 0.259211 % cheek upper right
+weight 16.000000 = 0.263158 % cheek down right
+weight 17.000000 = 0.231579 % cheek upper left
+weight 18.000000 = 0.287500 % cheek down left
+weight 19.000000 = 0.377632 % chin
+reco_rate1 = 0.932237
+
+========================================
+weight 1.000000 = 1.000000
+weight 2.000000 = 1.000000
+weight 3.000000 = 1.000000
+weight 4.000000 = 1.000000
+weight 5.000000 = 1.000000
+weight 6.000000 = 1.000000
+weight 7.000000 = 1.000000
+weight 8.000000 = 1.000000
+weight 9.000000 = 1.000000
+weight 10.000000 = 1.000000
+weight 11.000000 = 1.000000
+weight 12.000000 = 1.000000
+weight 13.000000 = 1.000000
+weight 14.000000 = 1.000000
+weight 15.000000 = 1.000000
+weight 16.000000 = 1.000000
+weight 17.000000 = 1.000000
+weight 18.000000 = 1.000000
+weight 19.000000 = 1.000000
+reco_rate1 = 0.926974
